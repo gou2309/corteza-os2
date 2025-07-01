@@ -1,4 +1,5 @@
 # 🧠 Corteza OS2 — Sistema Inteligente de Visibilidad para Shopify
+![CI](https://github.com/gou2309/corteza-os2/actions/workflows/ci.yml/badge.svg)
 
 **Corteza OS2** es una combinación única de tema visual + app inteligente que potencia la visibilidad, segmentación por zonas y campañas adaptadas para tiendas Shopify.
 
