@@ -1,0 +1,29 @@
+{
+  "name": "SEO Insights Block",
+  "target": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "zona",
+      "label": "Zona geográfica",
+      "default": "Guadalajara"
+    },
+    {
+      "type": "text",
+      "id": "giro",
+      "label": "Giro del negocio",
+      "default": "cosmética natural"
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "Llamado a la acción (CTA)",
+      "default": "descubre belleza natural"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEO Inteligente por Corteza"
+    }
+  ]
+}
