@@ -1,0 +1,19 @@
+{% comment %} Snippet dinámico SEO basado en metacampos públicos {% endcomment %}
+{% if shop.metafields.public.giro and shop.metafields.public.zona %}
+  <title>{{ shop.name }} | {{ shop.metafields.public.giro }} en {{ shop.metafields.public.zona }}</title>
+  <meta name="description" content="Descubre lo mejor en {{ shop.metafields.public.giro }} disponible en {{ shop.metafields.public.zona }}. Productos seleccionados pensando en ti.">
+  <meta name="keywords" content="{{ shop.metafields.public.giro }}, {{ shop.metafields.public.zona }}, {{ shop.metafields.public.colores }}, {{ shop.metafields.public.cta }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "{{ shop.name }}",
+    "address": {
+      "addressLocality": "{{ shop.metafields.public.zona }}",
+      "addressRegion": "{{ shop.metafields.public.estado }}",
+      "addressCountry": "MX"
+    },
+    "url": "{{ shop.url }}"
+  }
+  </script>
+{% endif %}
