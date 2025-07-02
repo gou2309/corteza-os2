@@ -1,0 +1,13 @@
+{
+  "locale": "en",
+  "region": "Global",
+  "industry": "General",
+  "cta": "Discover something new",
+  "colors": ["#999999", "#ffffff"],
+  "keywords": ["modern", "versatile", "minimalist"],
+  "schema": {
+    "title": "Explore Unique Online Shops",
+    "description": "Visual themes with strategic recommendations to boost your store.",
+    "image": "https://placehold.co/600x360?text=Default+Visual"
+  }
+}
