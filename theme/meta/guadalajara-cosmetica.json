@@ -1,0 +1,12 @@
+{
+  "zona": "Guadalajara",
+  "giro": "Cosmética Natural",
+  "cta": "Descubre belleza natural",
+  "colores": ["#6dc2b8", "#ffffff"],
+  "keywords": ["vegano", "orgánico", "piel sensible"],
+  "estructura_schema": {
+    "title": "Cosméticos naturales en Guadalajara",
+    "description": "Descubre productos de belleza saludables y sostenibles.",
+    "image": "https://gou2309.github.io/corteza-os2/landing/assets/visual-cta.png"
+  }
+}
