@@ -1,0 +1,13 @@
+{
+  "name": "corteza-os2",
+  "version": "1.0.0",
+  "description": "Visibilidad Inteligente para Shopify: Tema + App + Metadata",
+  "scripts": {
+    "dev": "echo '🌱 Modo desarrollo aún no configurado'",
+    "build": "echo '🔧 Compilación aún no habilitada'",
+    "preview": "echo '🧪 Modo preview en construcción'"
+  },
+  "keywords": ["shopify", "seo", "theme", "metadata", "app", "liquid"],
+  "author": "Luis (gou2309)",
+  "license": "MIT"
+}
