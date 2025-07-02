@@ -47,8 +47,11 @@
 <div class="seo-insights-block">
   <h2>{{ section.settings.cta }}</h2>
   <p><strong>Palabras clave:</strong> {{ section.settings.keywords }}</p>
-  <p><strong>Color:</strong> <span style="color:{{ section.settings.color_principal }};">●</span></p>
+  <p><strong>Color:</strong>
+    <span style="color:{{ section.settings.color_principal }};">●</span>
+  </p>
   <h3>{{ section.settings.seo_title }}</h3>
   <p>{{ section.settings.seo_description }}</p>
 </div>
+
 <script src="{{ 'seo-injector.js' | asset_url }}" defer></script>
