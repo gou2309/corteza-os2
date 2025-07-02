@@ -1,0 +1,13 @@
+{
+  "locale": "es-MX",
+  "region": "México",
+  "industry": "Cosmética Natural",
+  "cta": "Descubre belleza natural",
+  "colors": ["#91d8c2", "#ffffff"],
+  "keywords": ["cosmética vegana", "piel sensible", "productos orgánicos"],
+  "schema": {
+    "title": "Cosméticos naturales en México",
+    "description": "Cuidado de la piel saludable con ingredientes sustentables.",
+    "image": "https://gou2309.github.io/corteza-os2/landing/assets/visual-cta.png"
+  }
+}
