@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "Visibilidad Inteligente para Shopify: Tema + App + Metadata",
   "scripts": {
+    "dev": "nodemon server/index.js",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "dev": "echo '🌱 Modo desarrollo aún no configurado'",
-    "build": "echo '🔧 Compilación aún no habilitada'",
-    "preview": "echo '🧪 Modo preview en construcción'"
+    "ci:check": "eslint . && prettier --check .",
+    "preview": "echo '🧪 Modo preview en construcción'",
+    "build": "echo '🔧 Compilación aún no habilitada'"
   },
   "keywords": ["shopify", "seo", "theme", "metadata", "app", "liquid"],
   "author": "Luis (gou2309)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.19.2",
+    "eslint": "^8.57.0",
+    "nodemon": "^3.1.0",
+    "prettier": "^3.2.5"
+  }
 }
