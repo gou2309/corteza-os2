@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Visibilidad Inteligente para Shopify: Tema + App + Metadata",
   "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write .",
     "dev": "echo '🌱 Modo desarrollo aún no configurado'",
     "build": "echo '🔧 Compilación aún no habilitada'",
     "preview": "echo '🧪 Modo preview en construcción'"
