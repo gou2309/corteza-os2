@@ -1,0 +1,53 @@
+{% schema %}
+{
+  "name": "SEO Insights",
+  "tag": "section",
+  "class": "seo-insights",
+  "settings": [
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "CTA sugerido",
+      "default": "Descubre lo que tu tienda puede lograr"
+    },
+    {
+      "type": "textarea",
+      "id": "keywords",
+      "label": "Keywords destacadas",
+      "default": "tienda online, cosmética, natural"
+    },
+    {
+      "type": "color",
+      "id": "color_principal",
+      "label": "Color principal",
+      "default": "#6600cc"
+    },
+    {
+      "type": "text",
+      "id": "seo_title",
+      "label": "Título SEO",
+      "default": "Cosmética Natural - Corteza MX"
+    },
+    {
+      "type": "textarea",
+      "id": "seo_description",
+      "label": "Descripción SEO",
+      "default": "Potencia tu tienda con recomendaciones basadas en datos reales."
+    }
+  ],
+  "presets": [
+    {
+      "name": "SEO Insights MX",
+      "category": "Optimización"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="seo-insights-block">
+  <h2>{{ section.settings.cta }}</h2>
+  <p><strong>Palabras clave:</strong> {{ section.settings.keywords }}</p>
+  <p><strong>Color:</strong> <span style="color:{{ section.settings.color_principal }};">●</span></p>
+  <h3>{{ section.settings.seo_title }}</h3>
+  <p>{{ section.settings.seo_description }}</p>
+</div>
