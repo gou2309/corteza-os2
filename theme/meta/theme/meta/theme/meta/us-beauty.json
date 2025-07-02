@@ -1,0 +1,13 @@
+{
+  "locale": "en-US",
+  "region": "United States",
+  "industry": "Clean Beauty",
+  "cta": "Reveal your natural glow",
+  "colors": ["#7ed6df", "#fefefe"],
+  "keywords": ["clean beauty", "vegan skincare", "sensitive skin"],
+  "schema": {
+    "title": "Clean Beauty for US Customers",
+    "description": "Sustainable and gentle skincare for everyday radiance.",
+    "image": "https://placehold.co/600x360?text=Clean+Beauty"
+  }
+}
