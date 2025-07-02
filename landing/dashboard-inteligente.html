@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard Inteligente — Corteza OS2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background-color: #f8fafc;
+      color: #1a202c;
+    }
+    header {
+      background: #1a202c;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    main {
+      max-width: 960px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.06);
+    }
+    h2 {
+      margin-top: 0;
+    }
+    .card {
+      background: #edf2f7;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: #718096;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Dashboard Inteligente — Corteza OS2</h1>
+    <p>Contenido sugerido dinámicamente según el país y giro del merchant</p>
+  </header>
+
+  <main>
+    <h2>🎯 Recomendaciones</h2>
+
+    <div class="card">
+      <p><strong>CTA sugerido:</strong> <span id="cta">Cargando...</span></p>
+      <p><strong>Paleta de colores:</strong> <span id="colors">Cargando...</span></p>
+      <p><strong>Keywords destacadas:</strong> <span id="keywords">Cargando...</span></p>
+    </div>
+
+    <h2>🔍 Datos de SEO sugeridos</h2>
+
+    <div class="card">
+      <p><strong>Título:</strong> <span id="title">Cargando...</span></p>
+      <p><strong>Descripción:</strong> <span id="description">Cargando...</span></p>
+      <p><strong>Imagen:</strong><br><img id="image" src="" alt="Visual Sugerido" style="max-width:100%; margin-top:0.5rem;" /></p>
+    </div>
+  </main>
+
+  <footer>
+    Corteza OS2 — Generado dinámicamente con datos localizados
+  </footer>
+
+  <script>
+    const pais = 'mx'; // cambiar a 'us' para simular otro país
+    const giro = 'cosmetica'; // cambiar según industria: 'moda', 'beauty', etc.
+    const file = `../theme/meta/${pais}-${giro}.json`;
+
+    fetch(file)
+      .then(res => {
+        if (!res.ok) throw new Error("Meta no encontrado");
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById("cta").textContent = data.cta;
+        document.getElementById("colors").textContent = data.colors.join(', ');
+        document.getElementById("keywords").textContent = data.keywords.join(', ');
+        document.getElementById("title").textContent = data.schema.title;
+        document.getElementById("description").textContent = data.schema.description;
+        document.getElementById("image").src = data.schema.image;
+      })
+      .catch(error => {
+        console.warn("❌ Meta.json no encontrado. Cargando fallback...", error);
+        fetch("../theme/meta/default.json")
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById("cta").textContent = data.cta;
+            document.getElementById("colors").textContent = data.colors.join(', ');
+            document.getElementById("keywords").textContent = data.keywords.join(', ');
+            document.getElementById("title").textContent = data.schema.title;
+            document.getElementById("description").textContent = data.schema.description;
+            document.getElementById("image").src = data.schema.image;
+          });
+      });
+  </script>
+</body>
+</html>
