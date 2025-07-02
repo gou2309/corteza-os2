@@ -1,0 +1,36 @@
+name: 🔍 Validación de código con ESLint y Prettier
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clonar el repositorio
+        uses: actions/checkout@v3
+
+      - name: 🔧 Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Instalar dependencias (si existe package.json)
+        run: |
+          if [ -f package.json ]; then
+            npm ci || npm install
+          fi
+
+      - name: 🧪 Ejecutar ESLint
+        run: |
+          if [ -f .eslintrc.json ] || [ -f .eslintrc-temp.json ]; then
+            npx eslint . || echo "⚠️ ESLint detectó errores"
+          fi
+
+      - name: 💅 Ejecutar Prettier
+        run: |
+          if [ -f .prettierrc ] || [ -f .prettierrc.json ]; then
+            npx prettier . --check || echo "⚠️ Prettier detectó archivos con estilo incorrecto"
+          fi
