@@ -1,0 +1,31 @@
+const express = require("express");
+const path = require("path");
+const fs = require("fs");
+
+const router = express.Router();
+
+router.get("/meta", (req, res) => {
+  const { country, industry } = req.query;
+
+  if (!country || !industry) {
+    return res.status(400).json({ error: "Faltan parámetros: country e industry" });
+  }
+
+  const filename = `${country}-${industry}.json`;
+  const filepath = path.join(__dirname, "../../seo/data", filename);
+
+  // Verifica si el archivo existe antes de cargarlo
+  if (!fs.existsSync(filepath)) {
+    return res.status(404).json({ error: `No se encontró metadata para ${country}-${industry}` });
+  }
+
+  try {
+    const rawData = fs.readFileSync(filepath);
+    const metadata = JSON.parse(rawData);
+    res.json(metadata);
+  } catch (err) {
+    res.status(500).json({ error: "Error al leer metadata", details: err.message });
+  }
+});
+
+module.exports = router;
