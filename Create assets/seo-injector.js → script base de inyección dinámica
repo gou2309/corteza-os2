@@ -1,0 +1,39 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  const seoBlock = document.querySelector(".seo-insights-block");
+  if (!seoBlock) return;
+
+  const scriptTag = document.querySelector("script[data-seo-insights]");
+  if (!scriptTag) return;
+
+  // 📦 Ruta al archivo de metadatos (ej. mx-cosmetica.json)
+  const metadataFile = scriptTag.textContent.trim();
+  const metadataUrl = `/assets/${metadataFile}`;
+
+  try {
+    const res = await fetch(metadataUrl);
+    if (!res.ok) throw new Error("Error al cargar metadatos");
+
+    const metadata = await res.json();
+
+    // 🧠 Render dinámico dentro del bloque SEO
+    if (metadata && metadata.suggestions) {
+      const ul = document.createElement("ul");
+      ul.style.marginTop = "1rem";
+
+      metadata.suggestions.forEach((tip) => {
+        const li = document.createElement("li");
+        li.textContent = tip;
+        ul.appendChild(li);
+      });
+
+      const title = document.createElement("h4");
+      title.textContent = "Sugerencias SEO para tu región/industria:";
+      title.style.marginTop = "2rem";
+
+      seoBlock.appendChild(title);
+      seoBlock.appendChild(ul);
+    }
+  } catch (error) {
+    console.warn("Error cargando sugerencias SEO:", error.message);
+  }
+});
