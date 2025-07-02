@@ -1,0 +1,13 @@
+{
+  "locale": "es-MX",
+  "region": "México",
+  "industry": "Moda Artesanal",
+  "cta": "Viste con identidad",
+  "colors": ["#6ca0dc", "#ffffff"],
+  "keywords": ["ropa hecha a mano", "moda mexicana", "textiles tradicionales"],
+  "schema": {
+    "title": "Moda artesanal mexicana",
+    "description": "Diseños únicos inspirados en cultura y tradición.",
+    "image": "https://placehold.co/600x360?text=Moda+Artesanal"
+  }
+}
