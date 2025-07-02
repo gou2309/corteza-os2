@@ -1,0 +1,13 @@
+{
+  "locale": "en-US",
+  "region": "United States",
+  "industry": "Apparel",
+  "cta": "Style that speaks for you",
+  "colors": ["#8fb8ec", "#ffffff"],
+  "keywords": ["independent fashion", "slow fashion", "handmade"],
+  "schema": {
+    "title": "Independent Apparel Brands in the US",
+    "description": "Discover expressive clothing by emerging designers.",
+    "image": "https://placehold.co/600x360?text=Fashion+US"
+  }
+}
