@@ -1,10 +1,12 @@
 {
   "name": "corteza-os2",
   "version": "1.0.0",
+  "type": "module",
   "description": "Visibilidad Inteligente para Shopify: Tema + App + Metadata",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "nodemon server/index.js",
+    "start": "node server/index.mjs",
+    "dev": "nodemon server/index.mjs",
+
     "lint": "eslint .",
     "format": "prettier --write .",
     "ci:check": "eslint . && prettier --check .",
