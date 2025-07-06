@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Visibilidad Inteligente para Shopify: Tema + App + Metadata",
   "scripts": {
+    "start": "node server/index.js",
     "dev": "nodemon server/index.js",
     "lint": "eslint .",
     "format": "prettier --write .",
