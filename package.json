@@ -16,8 +16,11 @@
   "keywords": ["shopify", "seo", "theme", "metadata", "app", "liquid"],
   "author": "Luis (gou2309)",
   "license": "MIT",
+  "dependencies": {
+  "express": "^4.19.2"
+  },
   "devDependencies": {
-    "express": "^4.19.2",
+
     "eslint": "^8.57.0",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
