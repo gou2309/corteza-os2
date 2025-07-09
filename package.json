@@ -6,21 +6,27 @@
   "scripts": {
     "start": "node server/index.mjs",
     "dev": "nodemon server/index.mjs",
-
     "lint": "eslint .",
     "format": "prettier --write .",
     "ci:check": "eslint . && prettier --check .",
     "preview": "echo '🧪 Modo preview en construcción'",
     "build": "echo '🔧 Compilación aún no habilitada'"
   },
-  "keywords": ["shopify", "seo", "theme", "metadata", "app", "liquid"],
+  "keywords": [
+    "shopify",
+    "seo",
+    "theme",
+    "metadata",
+    "app",
+    "liquid"
+  ],
   "author": "Luis (gou2309)",
   "license": "MIT",
   "dependencies": {
-  "express": "^4.19.2"
+    "dotenv": "^17.1.0",
+    "express": "^4.19.2"
   },
   "devDependencies": {
-
     "eslint": "^8.57.0",
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5"
