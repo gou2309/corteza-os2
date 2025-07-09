@@ -13,8 +13,17 @@
       margin: 0;
       padding: 2rem;
     }
-    h1 {
+    h1, h2 {
       color: #58a6ff;
+    }
+    .banner {
+      background: linear-gradient(90deg, #00ffcc, #3399ff);
+      color: #000;
+      padding: 0.75rem;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 6px;
+      margin-bottom: 2rem;
     }
     .metrics {
       display: flex;
@@ -26,26 +35,31 @@
       background-color: #161b22;
       padding: 1.5rem;
       border-radius: 8px;
-      flex: 1 1 200px;
+      flex: 1 1 250px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
     .card h2 {
       margin: 0 0 0.5rem;
-      color: #79c0ff;
+      color: #00ffcc;
     }
     .card p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      margin: 0.3rem 0;
+    }
+    canvas {
+      background-color: #161b22;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
-  <div style="background: #ffcc00; color: #000; padding: 0.5rem; font-weight: bold;">
-    🔧 Estás viendo una versión demo de Corteza OS2
+  <div class="banner">
+    🔧 Estás viendo una versión demo de Corteza OS2 – Sistema Inteligente de Visibilidad para Shopify
   </div>
 
   <h1>📊 Dashboard de Visibilidad</h1>
-
-  <canvas id="ctrChart" width="400" height="200" style="margin-top: 2rem;"></canvas>
 
   <div class="metrics">
     <div class="card">
@@ -66,7 +80,13 @@
     </div>
   </div>
 
+  <canvas id="ctrChart" width="600" height="300"></canvas>
+
+  <h2 style="margin-top: 3rem;">📋 Campañas Simuladas</h2>
+  <div id="campaigns" class="metrics"></div>
+
   <script>
+    // Gráfica de CTR por zona
     const ctx = document.getElementById('ctrChart').getContext('2d');
     new Chart(ctx, {
       type: 'bar',
@@ -75,14 +95,28 @@
         datasets: [{
           label: 'CTR (%)',
           data: [4.5, 3.8, 4.2],
-          backgroundColor: ['#00ffcc', '#3399ff', '#ff66cc']
+          backgroundColor: ['#00ffcc', '#3399ff', '#ff66cc'],
+          borderRadius: 6
         }]
       },
       options: {
+        plugins: {
+          legend: {
+            labels: {
+              color: '#c9d1d9'
+            }
+          }
+        },
         scales: {
+          x: {
+            ticks: { color: '#c9d1d9' },
+            grid: { color: '#30363d' }
+          },
           y: {
             beginAtZero: true,
-            max: 6
+            max: 6,
+            ticks: { color: '#c9d1d9' },
+            grid: { color: '#30363d' }
           }
         }
       }
@@ -93,6 +127,48 @@
       const newCTR = (Math.random() * 5).toFixed(1);
       document.getElementById('ctrValue').textContent = `${newCTR}%`;
     }, 5000);
+
+    // Campañas simuladas
+    const campaigns = [
+      {
+        nombre: "Lanzamiento Verano",
+        inicio: "2025-06-01",
+        fin: "2025-06-30",
+        ctr: "4.8%",
+        clics: 1240,
+        zona: "Inicio"
+      },
+      {
+        nombre: "Descuento Flash",
+        inicio: "2025-07-01",
+        fin: "2025-07-05",
+        ctr: "3.9%",
+        clics: 860,
+        zona: "Producto"
+      },
+      {
+        nombre: "Campaña Influencers",
+        inicio: "2025-07-03",
+        fin: "2025-07-10",
+        ctr: "5.1%",
+        clics: 1420,
+        zona: "Colecciones"
+      }
+    ];
+
+    const container = document.getElementById('campaigns');
+    campaigns.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <h2>${c.nombre}</h2>
+        <p><strong>Fechas:</strong> ${c.inicio} → ${c.fin}</p>
+        <p><strong>CTR:</strong> ${c.ctr}</p>
+        <p><strong>Clics:</strong> ${c.clics}</p>
+        <p><strong>Zona más activa:</strong> ${c.zona}</p>
+      `;
+      container.appendChild(card);
+    });
   </script>
 </body>
 </html>
