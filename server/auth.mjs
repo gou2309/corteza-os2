@@ -1,7 +1,7 @@
 // server/auth.mjs
 import express from 'express';
-import crypto from 'crypto';
 import axios from 'axios';
+import crypto from 'node:crypto'; // 👈 asegúrate de usar el prefijo 'node:' para compatibilidad
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -20,7 +20,7 @@ router.get('/auth', (req, res) => {
   if (!shop) return res.status(400).send('Falta el parámetro "shop"');
 
   const redirectUri = `${HOST}/auth/callback`;
-  const state = crypto.randomBytes(8).toString('hex'); // nonce
+  const state = crypto.randomBytes(8).toString('hex');
   const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SCOPES}&redirect_uri=${redirectUri}&state=${state}`;
 
   res.cookie('state', state, { httpOnly: true, secure: true });
@@ -46,7 +46,6 @@ router.get('/auth/callback', async (req, res) => {
     return res.status(400).send('HMAC inválido');
   }
 
-  // Intercambiar el código por un access token
   try {
     const tokenResponse = await axios.post(`https://${shop}/admin/oauth/access_token`, {
       client_id: SHOPIFY_API_KEY,
