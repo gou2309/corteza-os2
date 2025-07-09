@@ -16,8 +16,10 @@ const __dirname = path.dirname(__filename);
 
 // Middleware
 app.use(cookieParser());
+app.use(express.json()); // 👈 importante para manejar JSON
+app.use(express.urlencoded({ extended: true }));
+app.use('/', authRoutes); // 👈 asegúrate de que esto esté antes que las rutas estáticas
 app.use(express.static(path.join(__dirname, '../public')));
-app.use('/', authRoutes);
 
 // Ruta: /postinstall
 app.get('/postinstall', (req, res) => {
