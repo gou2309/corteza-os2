@@ -64,7 +64,7 @@
   <div class="metrics">
     <div class="card">
       <h2>CTR Promedio</h2>
-      <p id="ctrValue">4.2%</p>
+      <p id="ctrValue">3.7%</p>
     </div>
     <div class="card">
       <h2>Campañas Activas</h2>
@@ -86,25 +86,28 @@
   <div id="campaigns" class="metrics"></div>
 
   <script>
-    // Gráfica de CTR por zona
+    // Gráfica de línea con estilo moderno
     const ctx = document.getElementById('ctrChart').getContext('2d');
     new Chart(ctx, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: ['Inicio', 'Colecciones', 'Producto'],
         datasets: [{
           label: 'CTR (%)',
           data: [4.5, 3.8, 4.2],
-          backgroundColor: ['#00ffcc', '#3399ff', '#ff66cc'],
-          borderRadius: 6
+          borderColor: '#00ffcc',
+          backgroundColor: 'rgba(0, 255, 204, 0.1)',
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: ['#00ffcc', '#3399ff', '#ff66cc'],
+          pointRadius: 6,
+          borderWidth: 2
         }]
       },
       options: {
         plugins: {
           legend: {
-            labels: {
-              color: '#c9d1d9'
-            }
+            labels: { color: '#c9d1d9' }
           }
         },
         scales: {
