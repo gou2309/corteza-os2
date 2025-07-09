@@ -23,6 +23,7 @@
   "author": "Luis (gou2309)",
   "license": "MIT",
   "dependencies": {
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.1.0",
     "express": "^4.19.2"
   },
