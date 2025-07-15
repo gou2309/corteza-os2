@@ -1,3 +1,5 @@
+// server/store-list.mjs
+
 import express from 'express';
 import { listRegisteredStores } from './services/storeRegistry.mjs';
 
