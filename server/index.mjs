@@ -6,10 +6,10 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
-// Cargar variables desde .env
+// ✅ Cargar variables de entorno
 dotenv.config();
 
-// Inicializar app
+// 🔧 Inicializar Express
 const app = express();
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
@@ -22,21 +22,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 
-// 🔗 Rutas personalizadas
+// 🔗 Importar rutas personalizadas
 import authRoutes from './auth.mjs';
 import callbackRoutes from './callback.mjs';
 import shopifyApiRoutes from './shopify-api.mjs';
-import metadataRoutes from './metadata.mjs'; // ← Si usas metadata también
+import metadataRoutes from './metadata.mjs';
+import storeListRoutes from './store-list.mjs'; // ✅ Nueva ruta agregada
 
+// 🧭 Montar rutas en la app
 app.use('/', authRoutes);
 app.use('/', callbackRoutes);
 app.use('/', shopifyApiRoutes);
-app.use('/', metadataRoutes); // ← Puedes comentar si no lo usas aún
+app.use('/', metadataRoutes);
+app.use('/', storeListRoutes); // ✅ Ruta para listar tiendas
 
-// 📁 Archivos estáticos
+// 📁 Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));
 
-// 🖥️ Rutas de interfaz
+// 🖼️ Rutas visuales
 app.get('/postinstall', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/postinstall.html'));
 });
@@ -45,13 +48,17 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/dashboard.html'));
 });
 
+app.get('/welcome', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/welcome.html'));
+});
+
 // ❌ Manejo de errores
 app.use((err, req, res, next) => {
   console.error('❌ Error interno:', err.message);
   res.status(500).send('Error del servidor');
 });
 
-// 🌐 Fallback 404
+// 🔍 Ruta Fallback 404
 app.get('*', (req, res) => {
   res.status(404).send('Página no encontrada');
 });
