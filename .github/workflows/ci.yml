@@ -33,8 +33,13 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Verificar existencia de script
+        run: test -f scripts/database.js
+
       - name: Inicializar base de datos
         run: node scripts/database.js init
+        env:
+          NODE_OPTIONS: "--experimental-modules"
 
       - name: Ejecutar pruebas
         run: npm test
