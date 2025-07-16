@@ -26,15 +26,17 @@ app.use(helmet());
 import authRoutes from './auth.mjs';
 import callbackRoutes from './callback.mjs';
 import shopifyApiRoutes from './shopify-api.mjs';
-import metadataRoutes from './metadata.mjs';
-import storeListRoutes from './store-list.mjs'; // ✅ Nueva ruta agregada
+import metadataRoutes from './metadata.mjs'; // ✅ Ruta corregida
+import storeListRoutes from './store-list.mjs';
+import apiRoutes from './api.mjs';
 
 // 🧭 Montar rutas en la app
+app.use('/api', metadataRoutes); // ✅ Ahora responde en /api/meta
 app.use('/', authRoutes);
 app.use('/', callbackRoutes);
 app.use('/', shopifyApiRoutes);
-app.use('/', metadataRoutes);
-app.use('/', storeListRoutes); // ✅ Ruta para listar tiendas
+app.use('/', storeListRoutes);
+app.use(apiRoutes);
 
 // 📁 Servir archivos estáticos desde public/
 app.use(express.static(path.join(__dirname, '../public')));
@@ -50,6 +52,10 @@ app.get('/dashboard', (req, res) => {
 
 app.get('/welcome', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/welcome.html'));
+});
+
+app.get('/error', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/error.html'));
 });
 
 // ❌ Manejo de errores

@@ -3,14 +3,16 @@ import express from 'express';
 import axios from 'axios';
 import crypto from 'node:crypto';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
 
 const router = express.Router();
+router.use(cookieParser());
 
 const {
-  SHOPIFY_API_KEY,
-  SHOPIFY_API_SECRET,
+  CLIENT_ID,
+  CLIENT_SECRET,
   SCOPES,
   HOST
 } = process.env;
@@ -22,9 +24,9 @@ router.get('/auth', (req, res) => {
 
   const redirectUri = `${HOST}/auth/callback`;
   const state = crypto.randomBytes(8).toString('hex');
-  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${SHOPIFY_API_KEY}&scope=${SCOPES}&redirect_uri=${redirectUri}&state=${state}`;
+  const installUrl = `https://${shop}/admin/oauth/authorize?client_id=${CLIENT_ID}&scope=${SCOPES}&redirect_uri=${redirectUri}&state=${state}`;
 
-  res.cookie('state', state, { httpOnly: true, secure: true });
+  res.cookie('state', state, { httpOnly: true, secure: true, sameSite: 'strict' });
   res.redirect(installUrl);
 });
 
@@ -41,7 +43,7 @@ router.get('/auth/callback', async (req, res) => {
   const params = { ...req.query };
   delete params['hmac'];
   const message = Object.keys(params).sort().map(key => `${key}=${params[key]}`).join('&');
-  const generatedHash = crypto.createHmac('sha256', SHOPIFY_API_SECRET).update(message).digest('hex');
+  const generatedHash = crypto.createHmac('sha256', CLIENT_SECRET).update(message).digest('hex');
 
   if (generatedHash !== hmac) {
     return res.status(400).send('❌ HMAC inválido');
@@ -49,14 +51,15 @@ router.get('/auth/callback', async (req, res) => {
 
   try {
     const tokenResponse = await axios.post(`https://${shop}/admin/oauth/access_token`, {
-      client_id: SHOPIFY_API_KEY,
-      client_secret: SHOPIFY_API_SECRET,
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
       code
     });
 
     const accessToken = tokenResponse.data.access_token;
 
-    // 👉 Aquí podrías guardar el token en una base de datos si lo deseas
+    // 👉 Aquí podrías guardar el token en memoria o base de datos
+    console.log(`🔐 Token recibido: ${accessToken}`);
 
     res.redirect('/postinstall');
   } catch (error) {
