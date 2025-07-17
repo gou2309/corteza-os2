@@ -1,6 +1,5 @@
 // server/index.mjs
 
-// 1. Carga dotenv solo en desarrollo
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
   dotenv.config();
@@ -13,9 +12,9 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 
-// Importa tus rutas
 import authRoutes from './auth.mjs';
 import callbackRoutes from './callback.mjs';
+import apiRoutes from './api.mjs';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,13 +28,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 
+app.use('/api', apiRoutes);
+
 // Rutas
 app.use('/', authRoutes);
 app.use('/', callbackRoutes);
 
 // Archivos estáticos y vistas
-app.use(express.static(path.join(__dirname, '../public')));
 app.get('/',           (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
+app.get('/welcome',    (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
 app.get('/postinstall',(req, res) => res.sendFile(path.join(__dirname, '../public/postinstall.html')));
 app.get('/dashboard',  (req, res) => res.sendFile(path.join(__dirname, '../public/dashboard.html')));
 app.get('/error',      (req, res) => res.sendFile(path.join(__dirname, '../public/error.html')));
