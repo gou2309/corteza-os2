@@ -28,18 +28,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
 
+// Rutas de API (tiendas y zonas)
 app.use('/api', apiRoutes);
 
-// Rutas
+// Rutas de OAuth
 app.use('/', authRoutes);
 app.use('/', callbackRoutes);
 
-// Archivos estáticos y vistas
-app.get('/',           (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
-app.get('/welcome',    (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
-app.get('/postinstall',(req, res) => res.sendFile(path.join(__dirname, '../public/postinstall.html')));
-app.get('/dashboard',  (req, res) => res.sendFile(path.join(__dirname, '../public/dashboard.html')));
-app.get('/error',      (req, res) => res.sendFile(path.join(__dirname, '../public/error.html')));
+// 1. Exponer archivos estáticos (.js, .css, imágenes)
+app.use(express.static(path.join(__dirname, '../public')));
+
+// 2. Vistas HTML
+app.get('/',            (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
+app.get('/welcome',     (req, res) => res.sendFile(path.join(__dirname, '../public/welcome.html')));
+app.get('/postinstall', (req, res) => res.sendFile(path.join(__dirname, '../public/postinstall.html')));
+app.get('/dashboard',   (req, res) => res.sendFile(path.join(__dirname, '../public/dashboard.html')));
+app.get('/error',       (req, res) => res.sendFile(path.join(__dirname, '../public/error.html')));
 
 // Error 500
 app.use((err, req, res, next) => {
