@@ -13,14 +13,14 @@ router.get('/stores', (req, res) => {
   ]);
 });
 
-// Mock: zonas registradas
+// Mock: zonas registradas (giro actualizado)
 router.get('/zonas', (req, res) => {
   res.json([
     {
       tienda: 'Corteza OS2',
       zona_colonia: 'Centro',
       ciudad_estado: 'Guadalajara, Jalisco',
-      giro_negocio: 'Moda',
+      giro_negocio: 'Apps de Marketing',
       fecha_actualizacion: '2025-07-08 19:45'
     }
   ]);
